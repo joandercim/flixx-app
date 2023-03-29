@@ -80,11 +80,18 @@ async function displayMovieDetails() {
   const movie = await fetchAPIData(`movie/${movieId}`);
   let imgPath;
 
+  //Check if movie poster is available
   if (movie.poster_path) {
     imgPath = 'https://image.tmdb.org/t/p/w500/' + movie.poster_path;
   } else {
     imgPath = 'images/no-image.jpg';
   }
+
+
+  //Get genres
+  const genres = movie.genres.map(genre => `<li>${genre.name}</li>`).join('');
+
+  movie.production_companies.forEach(obj => console.log(obj.name))
   
   const div = document.createElement('div');
   div.innerHTML = `        
@@ -108,29 +115,28 @@ async function displayMovieDetails() {
     </p>
     <h5>Genres</h5>
     <ul class="list-group">
-      <li>Genre 1</li>
-      <li>Genre 2</li>
-      <li>Genre 3</li>
+    ${genres}
     </ul>
-    <a href="#" target="_blank" class="btn">Visit Movie Homepage</a>
+    <a href="${movie.homepage}" target="_blank" class="btn">Visit Movie Homepage</a>
   </div>
 </div>
 <div class="details-bottom">
   <h2>Movie Info</h2>
   <ul>
-    <li><span class="text-secondary">Budget:</span> $1,000,000</li>
-    <li><span class="text-secondary">Revenue:</span> $2,000,000</li>
-    <li><span class="text-secondary">Runtime:</span> 90 minutes</li>
-    <li><span class="text-secondary">Status:</span> Released</li>
+    <li><span class="text-secondary">Budget:</span> $${movie.budget.toLocaleString('en')}</li>
+    <li><span class="text-secondary">Revenue:</span> $${movie.revenue.toLocaleString('en')}</li>
+    <li><span class="text-secondary">Runtime:</span> ${movie.runtime} minutes</li>
+    <li><span class="text-secondary">Status:</span> ${movie.status}</li>
   </ul>
   <h4>Production Companies</h4>
-  <div class="list-group">Company 1, Company 2, Company 3</div>
+  <div class="list-group">
+  ${movie.production_companies.map(company => `<span>${company.name}</span>`)
+.join(', ')}
+  
+  </div>
 </div>`;
   
   document.querySelector('#movie-details').appendChild(div);
-
-  console.log();
-  
 
 }
 
