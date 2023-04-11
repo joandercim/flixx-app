@@ -52,7 +52,7 @@ async function displayPopularShows() {
 
 // Display popular movies
 async function displayPopularMovies() {
-  const { results } = await fetchAPIData('movie/popular/');
+  const { results } = await fetchAPIData('movie/popular');
 
   results.forEach((movie) => {
     let imgPath;
