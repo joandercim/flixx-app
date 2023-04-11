@@ -98,8 +98,6 @@ async function displayTVDetails() {
   // Overlay for Background Image
   displayBackgroundImage('show', show.backdrop_path);
 
-  console.log(show.poster_path);
-
   const div = document.createElement('div');
   div.innerHTML = `        <div class="details-top">
   <div>
@@ -165,8 +163,6 @@ async function displayMovieDetails() {
 
   //Get genres
   const genres = movie.genres.map((genre) => `<li>${genre.name}</li>`).join('');
-
-  movie.production_companies.forEach((obj) => console.log(obj.name));
 
   // Overlay for Background Image
   displayBackgroundImage('movie', movie.backdrop_path);
