@@ -15,7 +15,7 @@ const global = {
 
 // Display popular TV Shows
 async function displayPopularShows() {
-  const { results } = await fetchAPIData('tv/popular');
+  const { results } = await fetchAPIData('/tv/popular');
   showSpinner();
 
   let imgPath;
